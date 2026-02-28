@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutralino System Explorer</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div id="app">
+      <header id="titlebar">
+        <h1>System Explorer</h1>
+        <span id="app-meta"></span>
+      </header>
+
+      <nav id="tabs">
+        <button class="tab active" data-tab="system">System Info</button>
+        <button class="tab" data-tab="filesystem">File System</button>
+        <button class="tab" data-tab="clipboard">Clipboard</button>
+        <button class="tab" data-tab="os">OS Tools</button>
+        <button class="tab" data-tab="window">Window</button>
+      </nav>
+
+      <main id="content">
+
+        <!-- System Info Tab -->
+        <section id="tab-system" class="tab-panel active">
+          <h2>Hardware & OS</h2>
+          <div id="system-info" class="info-grid"></div>
+          <button onclick="loadSystemInfo()">Refresh</button>
+        </section>
+
+        <!-- File System Tab -->
+        <section id="tab-filesystem" class="tab-panel">
+          <h2>File Explorer</h2>
+          <div class="row">
+            <input type="text" id="dir-path" placeholder="Enter directory path..." />
+            <button onclick="listDirectory()">List</button>
+            <button onclick="browseFolder()">Browse...</button>
+          </div>
+          <div id="dir-listing" class="listing"></div>
+
+          <h2>Quick File I/O</h2>
+          <div class="row">
+            <button onclick="writeTestFile()">Write Test File</button>
+            <button onclick="readTestFile()">Read Test File</button>
+            <button onclick="removeTestFile()">Delete Test File</button>
+          </div>
+          <pre id="file-output"></pre>
+        </section>
+
+        <!-- Clipboard Tab -->
+        <section id="tab-clipboard" class="tab-panel">
+          <h2>Clipboard</h2>
+          <textarea id="clip-input" rows="4" placeholder="Type text to copy..."></textarea>
+          <div class="row">
+            <button onclick="copyToClipboard()">Copy to Clipboard</button>
+            <button onclick="pasteFromClipboard()">Paste from Clipboard</button>
+          </div>
+          <div id="clip-format"></div>
+          <pre id="clip-output"></pre>
+        </section>
+
+        <!-- OS Tools Tab -->
+        <section id="tab-os" class="tab-panel">
+          <h2>Run a Shell Command</h2>
+          <div class="row">
+            <input type="text" id="cmd-input" placeholder="e.g. ls -la" />
+            <button onclick="runCommand()">Run</button>
+          </div>
+          <pre id="cmd-output"></pre>
+
+          <h2>Environment Variable</h2>
+          <div class="row">
+            <input type="text" id="env-key" placeholder="e.g. HOME" />
+            <button onclick="getEnvVar()">Get</button>
+          </div>
+          <pre id="env-output"></pre>
+
+          <h2>Notifications & Dialogs</h2>
+          <div class="row">
+            <button onclick="sendNotification()">Send Notification</button>
+            <button onclick="showMsgBox()">Message Box</button>
+            <button onclick="openFileDialog()">Open File Dialog</button>
+          </div>
+          <pre id="dialog-output"></pre>
+
+          <h2>Known Paths</h2>
+          <div id="known-paths" class="info-grid"></div>
+          <button onclick="loadKnownPaths()">Load Paths</button>
+        </section>
+
+        <!-- Window Tab -->
+        <section id="tab-window" class="tab-panel">
+          <h2>Window Controls</h2>
+          <div class="row">
+            <button onclick="Neutralino.window.minimize()">Minimize</button>
+            <button onclick="Neutralino.window.maximize()">Maximize</button>
+            <button onclick="Neutralino.window.unmaximize()">Restore</button>
+            <button onclick="Neutralino.window.center()">Center</button>
+          </div>
+          <div class="row">
+            <button onclick="setWindowTitle()">Set Title</button>
+            <input type="text" id="win-title" placeholder="New title..." />
+          </div>
+          <div class="row">
+            <button onclick="resizeWindow()">Resize to 640x480</button>
+            <button onclick="moveWindow()">Move to (100,100)</button>
+            <button onclick="toggleAlwaysOnTop()">Toggle Always-on-Top</button>
+          </div>
+          <h2>Window Info</h2>
+          <button onclick="getWindowInfo()">Get Size & Position</button>
+          <pre id="win-output"></pre>
+        </section>
+
+      </main>
+    </div>
+
+    <script src="/js/neutralino.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
